@@ -41,13 +41,10 @@ mapper.xml如下查询SQL
 商品表和库存表外连接区域特征表查询商品启用的信息，按区域特征等级降序分页查询
 <select id="selectByPage" resultType="goods">
 select g.* from cy_goods g inner join cy_goods_sku k on g.id=k.goods_id left join cy_area_categories c on c.categories_id=g.cate_id and c.a_id=(select a_id from cy_province where p_id=#{pid}) order by c.level desc
-limit ${limit},${size} 
+limit ${start},${size} 
 </select>
 
-前端通过当前用户的地理位置，获取所在省份信息，讲省份编号传递回后台，实现商品最优查询
-var pid = //获取当前用户所在(城市)省份编号 
-axios("goods/selectByPage", `pid=${pid}`).then(res=>{ this.list = res.data; 
-})
+前端通过当前用户的地理位置，获取所在省份信息，讲省份编号传递回后台，实现商品最优查询。
 
 第二题解决方案：
 不更改原有的service和controller实现，继承原有的service，创建新的GoodsServiceImpl2，重新商品分页查询方法，将最新的service注入进来，实现更改前后的效果对比。
