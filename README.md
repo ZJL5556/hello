@@ -1,4 +1,5 @@
 # 第一题解决方案：
+添加省市级联，建立不同地区与不同商品之间的联系，通过切换地区，动态展示商品
 设计区域表、省、市表、区域类别特征表根据类别特征及等级不同(值越大优先级越高)，按用户所在城市，查找其所在区域，按其区域特征查询关联的商品类别，优先查询级别高的商品。
 简单的设计表
 -- 区域表 --
@@ -49,4 +50,4 @@ axios("goods/selectByPage", `pid=${pid}`).then(res=>{ this.list = res.data;
 })
 
 第二题解决方案：
-尽量不更改原有的service和controller实现，创建新的GoodsServiceImpl2，继承原有的service，重新商品分页查询方法，商品controller用@Resource注解，讲最新的service注入进来，实现更改前后的效果对比
+不更改原有的service和controller实现，继承原有的service，创建新的GoodsServiceImpl2，重新商品分页查询方法，将最新的service注入进来，实现更改前后的效果对比。
